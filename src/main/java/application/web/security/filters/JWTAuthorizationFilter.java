@@ -31,10 +31,10 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
         Cookie token = null;
 
-        for (Cookie coockie : cookies
+        for (Cookie cookie : cookies
              ) {
-            if(coockie.getName().equals(COOKIE_TOKEN)){
-                token = coockie;
+            if(cookie.getName().equals(COOKIE_TOKEN)){
+                token = cookie;
             }
         }
 

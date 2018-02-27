@@ -22,15 +22,13 @@ import org.apache.wicket.markup.html.panel.EmptyPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public abstract class BasePage extends WebPage {
+public class BasePage extends WebPage {
 
 	/**
 	 * 
@@ -51,18 +49,9 @@ public abstract class BasePage extends WebPage {
 		return title;
 	}
 
-
-	public BasePage(PageParameters params){
-		
-		super(params);
-		initPage();
-	}
-	
-	public BasePage(){
-		initPage();
-	}
-	
-	private void initPage(){
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
 		defaultModal = new EmptyPanel("defaultModal");
 		defaultModal.setOutputMarkupId(true);
 		add(defaultModal);
@@ -73,6 +62,8 @@ public abstract class BasePage extends WebPage {
 		createLocalesDCC();
 		createHeaderLinks();
 	}
+
+
 	private void createHeaderLinks() {
 		loginLink = new Link<String>("loginLink", new ResourceModel("loginLink")) {
 
@@ -197,17 +188,7 @@ public abstract class BasePage extends WebPage {
 		response.render(JavaScriptHeaderItem.forReference(getApplication().getJavaScriptLibrarySettings().getJQueryReference()));
 		response.render(JavaScriptHeaderItem.forReference(getApplication().getJavaScriptLibrarySettings().getWicketEventReference()));
 		response.render(JavaScriptHeaderItem.forReference(getApplication().getJavaScriptLibrarySettings().getWicketAjaxReference()));
-		
-		String bootstrapPrefixPath = "bootstrap/current";
-//		String bootstrapSelectPrefixPath = "bootstrap-select/current";
-//		response.render(new CssUrlReferenceHeaderItem("https://bootswatch.com/4/flatly/bootstrap.css", null, null));
-//		response.render(new CssUrlReferenceHeaderItem("https://bootswatch.com/4/flatly/_variables.scss", null, null));
-//		response.render(new CssUrlReferenceHeaderItem("https://bootswatch.com/4/flatly/_bootswatch.scss", null, null));
-        response.render(JavaScriptHeaderItem.forReference(new WebjarsJavaScriptResourceReference(bootstrapPrefixPath + "/js/bootstrap.js")));
-		response.render(CssHeaderItem.forReference(new WebjarsJavaScriptResourceReference(bootstrapPrefixPath + "/css/bootstrap.css")));
-//      response.render(JavaScriptHeaderItem.forReference(new WebjarsJavaScriptResourceReference(bootstrapSelectPrefixPath + "/dist/js/bootstrap-select.js")));
-//		response.render(CssHeaderItem.forReference(new WebjarsJavaScriptResourceReference(bootstrapSelectPrefixPath + "/dist/css/bootstrap-select.css")));
-		//response.render(CssHeaderItem.forReference(new WebjarsJavaScriptResourceReference(bootstrapPrefixPath + "/css/bootstrap-dark.css")));
+
 		response.render(CssHeaderItem.forReference(new CssResourceReference(BasePage.class, "../css/style.css")));
 	}
 	
@@ -216,5 +197,7 @@ public abstract class BasePage extends WebPage {
 		Application.get().getMarkupSettings().setStripWicketTags(true);
 		super.onBeforeRender();
 	}
+
+
 
 }

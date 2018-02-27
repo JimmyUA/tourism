@@ -17,9 +17,12 @@ public class HomePage extends BasePage {
 	private static final long serialVersionUID = 1L;
 
 
-	public HomePage() {
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
 		getTitle().setDefaultModel(Model.of("Home Page"));
 	}
+
 
 
 

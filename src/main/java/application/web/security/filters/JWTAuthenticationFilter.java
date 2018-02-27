@@ -62,5 +62,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setHeader(HEADER_STRING, tokenValue);
         System.out.println("\n\n\n\n\n\n\n\n" + tokenValue);
         response.addCookie(new Cookie(COOKIE_TOKEN, tokenValue));
+        response.sendRedirect("/home");
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        response.sendRedirect("/login");
     }
 }

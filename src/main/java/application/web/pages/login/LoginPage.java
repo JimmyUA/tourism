@@ -5,7 +5,6 @@ import application.web.html.panel.FeedbackPanel;
 import application.web.pages.BasePage;
 import application.web.pages.home.HomePage;
 import com.giffing.wicket.spring.boot.context.scan.WicketSignInPage;
-import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
@@ -16,7 +15,6 @@ import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.wicketstuff.annotation.mount.MountPath;
 
@@ -41,16 +39,12 @@ public class LoginPage extends BasePage {
 	Button submit;
 
 
-	public LoginPage(PageParameters parameters) {
-		super(parameters);
-
-		if (((AbstractAuthenticatedWebSession) getSession()).isSignedIn()) {
-			continueToOriginalDestination();
-		}
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
 		add(getLoginForm("loginForm"));
 		getTitle().setDefaultModel(new ResourceModel("loginPageTitle"));
 	}
-
 
 	private Form getLoginForm(String id) {
 		Form form = new Form(id);
