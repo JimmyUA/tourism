@@ -1,9 +1,9 @@
 package application.persistence.repository;
 
-import application.entity.User;
+import application.entity.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long>{
+public interface UserRepository extends JpaRepository<AppUser, Long>{
 
-    User findUserByUsername(String username);
+    AppUser findUserByUsername(String username);
 }
