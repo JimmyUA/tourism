@@ -1,6 +1,7 @@
 package application.web.pages.login;
 
 
+import application.service.TourismUserDetailService;
 import application.web.html.panel.FeedbackPanel;
 import application.web.pages.BasePage;
 import application.web.pages.home.HomePage;
@@ -19,6 +20,10 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
+import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.wicketstuff.annotation.mount.MountPath;
 
 /**
@@ -51,7 +56,6 @@ public class LoginPage extends BasePage {
 		getTitle().setDefaultModel(new ResourceModel("loginPageTitle"));
 	}
 	
-	@SuppressWarnings("rawtypes")
 	private Form getLoginForm(String id) {
 		Form form = new Form(id);
 		
@@ -65,7 +69,6 @@ public class LoginPage extends BasePage {
 
 			@Override
 			public void onSubmit() {
-				
 				AuthenticatedWebSession session = AuthenticatedWebSession.get();
 				if (session.signIn(userNameField.getModelObject(), passwordTextField.getModelObject())) {
 					setResponsePage(HomePage.class);
