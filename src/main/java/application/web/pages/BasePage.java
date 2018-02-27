@@ -1,7 +1,6 @@
 package application.web.pages;
 
 import application.web.pages.login.LoginPage;
-import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
 import org.apache.wicket.Application;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.Session;
@@ -18,9 +17,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.markup.html.panel.EmptyPanel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.resource.CssResourceReference;
 
@@ -35,65 +32,27 @@ public class BasePage extends WebPage {
 	 */
 	private static final long serialVersionUID = 1L;
 	private MarkupContainer defaultModal;
-	private Label title;
 	protected List<String> localeNames;
 	protected DropDownChoice<String> localeDDC;
 	protected Image logoImage;
-	private Link<String> loginLink;
-	private Link<String> cabinetLink;
-	private Link<String> logoutLink;
+	protected Link<String> loginLink;
+	protected Link<String> cabinetLink;
+	protected Link<String> logoutLink;
 
-
-	
-	public Label getTitle() {
-		return title;
-	}
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		defaultModal = new EmptyPanel("defaultModal");
-		defaultModal.setOutputMarkupId(true);
-		add(defaultModal);
-		title = new Label("title", "Minecraft Subscribe Service");
-		add(title);
-		add(new Label("serverName",
-				Model.of(" ")));
 		createLocalesDCC();
 		createHeaderLinks();
 	}
 
 
 	private void createHeaderLinks() {
-		loginLink = new Link<String>("loginLink", new ResourceModel("loginLink")) {
+		loginLink = getLoginLink();
+		logoutLink = getLogoutLink();
+		cabinetLink = getCabinetLink();
 
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void onClick() {
-				setResponsePage(LoginPage.class);
-			}
-		};
-
-		logoutLink = new Link<String>("logoutLink") {
-
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void onClick() {
-				setResponsePage(LoginPage.class);
-			}
-		};
-
-		cabinetLink = new Link<String>("cabinetLink") {
-
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void onClick() {
-				setResponsePage(LoginPage.class);
-			}
-		};
 		loginLink.add(new Label("label", new ResourceModel("loginLink")));
 		logoutLink.add(new Label("label", new ResourceModel("logoutLink"))).setVisible(false);
 		cabinetLink.add(new Label("label", new ResourceModel("cabinetLink"))).setVisible(false);
@@ -102,7 +61,43 @@ public class BasePage extends WebPage {
 
 	}
 
-	@SuppressWarnings("rawtypes")
+	private Link<String> getLoginLink() {
+		return new Link<String>("loginLink", new ResourceModel("loginLink")) {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick() {
+				setResponsePage(LoginPage.class);
+			}
+		};
+	}
+
+	private Link<String> getLogoutLink() {
+		return new Link<String>("logoutLink") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick() {
+				setResponsePage(LoginPage.class);
+			}
+		};
+	}
+
+	private Link<String> getCabinetLink() {
+		return new Link<String>("cabinetLink") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick() {
+				setResponsePage(LoginPage.class);
+			}
+		};
+	}
+
+
 	private void createLocalesDCC() {
 		List<Locale> locales = Arrays.asList(Locale.ENGLISH, new Locale("ru"));
 		Form ddcForm = new Form("ddcForm");

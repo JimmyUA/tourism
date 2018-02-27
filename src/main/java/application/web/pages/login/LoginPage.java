@@ -43,7 +43,6 @@ public class LoginPage extends BasePage {
 	protected void onInitialize() {
 		super.onInitialize();
 		add(getLoginForm("loginForm"));
-		getTitle().setDefaultModel(new ResourceModel("loginPageTitle"));
 	}
 
 	private Form getLoginForm(String id) {

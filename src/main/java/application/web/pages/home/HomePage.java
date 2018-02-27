@@ -20,7 +20,6 @@ public class HomePage extends BasePage {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		getTitle().setDefaultModel(Model.of("Home Page"));
 	}
 
 
