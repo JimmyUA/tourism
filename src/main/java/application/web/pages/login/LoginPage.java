@@ -42,11 +42,12 @@ public class LoginPage extends BasePage {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		add(getLoginForm("loginForm"));
+		add(getLoginForm());
+		loginLink.setVisible(false);
 	}
 
-	private Form getLoginForm(String id) {
-		Form form = new Form(id);
+	private Form getLoginForm() {
+		Form form = new Form("loginForm");
 
 		loginFormTitle = new Label("loginFormTitle", new ResourceModel("loginFormTitle"));
 		feedbackPanel = new FeedbackPanel("feedback");

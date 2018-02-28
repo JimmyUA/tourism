@@ -1,5 +1,6 @@
 package application.web.security.filters;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,8 +33,8 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         Cookie token = null;
 
         for (Cookie cookie : cookies
-             ) {
-            if(cookie.getName().equals(COOKIE_TOKEN)){
+                ) {
+            if (cookie.getName().equals(COOKIE_TOKEN)) {
                 token = cookie;
             }
         }
@@ -56,19 +57,26 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
         String token = null;
 
-        for (Cookie cookie: cookies
-             ) {
-            if (cookie.getName().equals(COOKIE_TOKEN)){
+        for (Cookie cookie : cookies
+                ) {
+            if (cookie.getName().equals(COOKIE_TOKEN)) {
                 token = cookie.getValue();
             }
         }
 
         if (token != null) {
-            String user = Jwts.parser()
-                    .setSigningKey(SECRET.getBytes())
-                    .parseClaimsJws(token.replace(TOKEN_PREFIX , ""))
-                    .getBody()
-                    .getSubject();
+            String user = null;
+            try {
+
+                user = Jwts.parser()
+                        .setSigningKey(SECRET.getBytes())
+                        .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
+                        .getBody()
+                        .getSubject();
+            } catch (ExpiredJwtException e) {
+                //log
+                return null;
+            }
 
             if (user != null) {
                 return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
