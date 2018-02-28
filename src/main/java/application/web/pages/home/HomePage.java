@@ -1,14 +1,14 @@
 package application.web.pages.home;
 
-import application.web.pages.BasePage;
+import application.web.pages.base.BasePage;
+import application.web.pages.handletour.HandleTourPage;
+import application.web.pages.login.LoginPage;
+import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.model.Model;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.wicketstuff.annotation.mount.MountPath;
-
-
-import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 
 @MountPath("/home")
 @WicketHomePage
@@ -27,6 +27,19 @@ public class HomePage extends BasePage {
 		loginLink.setVisible(false);
 		logoutLink.setVisible(true);
 		cabinetLink.setVisible(true);
+
+		Link<String> handleTour = getHandleTourLink();
+
+		add(handleTour);
+	}
+
+	private Link<String> getHandleTourLink() {
+		return new Link<String>("handleTour") {
+			@Override
+			public void onClick() {
+				setResponsePage(HandleTourPage.class);
+			}
+		};
 	}
 
 

@@ -2,7 +2,7 @@ package application.web.pages.errors;
 
 import javax.servlet.http.HttpServletResponse;
 
-import application.web.pages.BasePage;
+import application.web.pages.base.BasePage;
 import org.apache.wicket.request.http.WebResponse;
 import org.wicketstuff.annotation.mount.MountPath;
 

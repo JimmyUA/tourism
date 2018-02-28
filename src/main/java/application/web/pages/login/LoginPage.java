@@ -2,7 +2,7 @@ package application.web.pages.login;
 
 
 import application.web.html.panel.FeedbackPanel;
-import application.web.pages.BasePage;
+import application.web.pages.base.BasePage;
 import application.web.pages.home.HomePage;
 import com.giffing.wicket.spring.boot.context.scan.WicketSignInPage;
 import org.apache.wicket.behavior.AttributeAppender;

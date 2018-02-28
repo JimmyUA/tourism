@@ -3,6 +3,7 @@ package application;
 import application.entity.AppUser;
 import application.persistence.repository.UserRepository;
 import application.service.TourismUserDetailService;
+import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +18,6 @@ public class SpringBeansCustomBeansConfig extends WebMvcConfigurerAdapter{
 
 	@Autowired
 	private UserRepository userRepository;
-
 
 	@Bean(name="CustomAccountDetailService")
 	public UserDetailsService accountDetailService() {
@@ -34,6 +34,7 @@ public class SpringBeansCustomBeansConfig extends WebMvcConfigurerAdapter{
 
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+
 		return new BCryptPasswordEncoder();
 	}
 

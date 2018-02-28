@@ -1,8 +1,9 @@
-package application.web.pages.login;
+package application.web.pages.handletour;
 
 import application.PersistenceConfig;
 import application.SpringBeansCustomBeansConfig;
 import application.WicketApplication;
+import application.web.pages.home.HomePage;
 import application.web.security.WebSecurity;
 import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
 import org.apache.wicket.util.tester.WicketTester;
@@ -13,9 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static org.junit.Assert.*;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebSecurity.class, PersistenceConfig.class, SpringBeansCustomBeansConfig.class, WicketApplication.class})
-public class LoginPageTest {
+public class HandleTourPageTest {
+
     @Autowired
     private WicketBootWebApplication wicketBootWebApplication;
 
@@ -26,13 +30,13 @@ public class LoginPageTest {
     @Before
     public void setUp() throws Exception {
         tester = new WicketTester();
-        tester.startPage(LoginPage.class);
+        tester.startPage(HandleTourPage.class);
     }
 
 
     @Test
     public void baseRender() throws Exception {
 
-        tester.assertRenderedPage(LoginPage.class);
+        tester.assertRenderedPage(HandleTourPage.class);
     }
 }

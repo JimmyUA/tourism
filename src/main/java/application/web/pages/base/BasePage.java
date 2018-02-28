@@ -1,4 +1,4 @@
-package application.web.pages;
+package application.web.pages.base;
 
 import application.web.pages.login.LoginPage;
 import org.apache.wicket.Application;
