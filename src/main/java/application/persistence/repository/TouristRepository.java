@@ -1,7 +1,7 @@
 package application.persistence.repository;
 
-import application.entity.database.TouristBD;
+import application.entity.Tourist;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TouristRepository extends JpaRepository<TouristBD, Long>{
+public interface TouristRepository extends JpaRepository<Tourist, Long>{
 }

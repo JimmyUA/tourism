@@ -1,10 +1,10 @@
-package application.entity.database;
+package application.entity;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "tourists")
-public class TouristBD {
+public class Tourist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +22,8 @@ public class TouristBD {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "parent_id")
-    private Long parentId;
+   @OneToOne
+    private Tourist parent;
 
     @Column(name = "bonus_amount")
     private Integer bonusAmount;
@@ -66,12 +66,12 @@ public class TouristBD {
         this.email = email;
     }
 
-    public Long getParentId() {
-        return parentId;
+    public Tourist getParent() {
+        return parent;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setParent(Tourist parent) {
+        this.parent = parent;
     }
 
     public Integer getBonusAmount() {
@@ -108,13 +108,13 @@ public class TouristBD {
 
     @Override
     public String toString() {
-        return "TouristBD{" +
+        return "Tourist{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", email='" + email + '\'' +
-                ", parentId=" + parentId +
+                ", parent=" + parent +
                 ", bonusAmount=" + bonusAmount +
                 ", usedBonuses=" + usedBonuses +
                 ", touristInfoId=" + touristInfoId +
