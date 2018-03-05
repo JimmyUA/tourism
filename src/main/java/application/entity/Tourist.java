@@ -22,7 +22,8 @@ public class Tourist {
     @Column(name = "email")
     private String email;
 
-   @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER, optional=true)
+    @JoinColumn(name="parent_id")
     private Tourist parent;
 
     @Column(name = "bonus_amount")
@@ -33,6 +34,9 @@ public class Tourist {
 
     @Column(name = "tourist_info_id")
     private Long touristInfoId;
+
+    @OneToMany(mappedBy="parent", fetch = FetchType.EAGER, cascade = CascadeType.DETACH, orphanRemoval=true)
+    private List<Tourist> detki;
 
     public Long getId() {
         return id;
@@ -106,6 +110,14 @@ public class Tourist {
         this.mobile = mobile;
     }
 
+    public List<Tourist> getDetki() {
+        return detki;
+    }
+
+    public void setDetki(List<Tourist> detki) {
+        this.detki = detki;
+    }
+
     @Override
     public String toString() {
         return "Tourist{" +
@@ -118,6 +130,7 @@ public class Tourist {
                 ", bonusAmount=" + bonusAmount +
                 ", usedBonuses=" + usedBonuses +
                 ", touristInfoId=" + touristInfoId +
+                ", detki=" + detki.size() +
                 '}';
     }
 }

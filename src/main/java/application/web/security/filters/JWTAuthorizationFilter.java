@@ -32,6 +32,11 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
         Cookie token = null;
 
+        if (cookies == null){
+            chain.doFilter(request, response);
+            return;
+        }
+
         for (Cookie cookie : cookies
                 ) {
             if (cookie.getName().equals(COOKIE_TOKEN)) {

@@ -35,11 +35,17 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
 
+        String username = "";
+        String password = "";
 
             Map<String, String[]> map = request.getParameterMap();
 
-            String username = map.get("username")[0];
-            String password = map.get("password")[0];
+            if (map != null || map.size() > 0){
+
+                username = map.get("username")[0];
+                password = map.get("password")[0];
+            }
+
 
 
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
