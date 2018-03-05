@@ -17,4 +17,9 @@ public class TouristService {
         return touristRepository.findAll();
     }
 
+    public Tourist getByMobile(String mobile){
+        return touristRepository.getByMobile(mobile);
+    }
+
+
 }
