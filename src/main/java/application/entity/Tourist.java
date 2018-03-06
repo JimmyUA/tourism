@@ -1,10 +1,11 @@
 package application.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity(name = "tourists")
-public class Tourist {
+public class Tourist implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

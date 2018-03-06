@@ -3,6 +3,7 @@ package application.web.pages.home;
 import application.web.pages.base.BasePage;
 import application.web.pages.handletour.HandleTourPage;
 import application.web.pages.login.LoginPage;
+import application.web.pages.touristinfo.TouristInfoPage;
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
@@ -50,7 +51,7 @@ public class HomePage extends BasePage {
         return new Link<String>("tourist") {
             @Override
             public void onClick() {
-                setResponsePage(HomePage.class);
+                setResponsePage(TouristInfoPage.class);
             }
         };
     }
