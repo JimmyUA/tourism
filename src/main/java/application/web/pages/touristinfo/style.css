@@ -1,0 +1,18 @@
+body {
+    background-image: url("egypt.png");
+    background-color: #cccccc;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+nav{
+    opacity: 0.1;
+}
+
+
+nav:hover{
+    opacity: 0.8;
+}
