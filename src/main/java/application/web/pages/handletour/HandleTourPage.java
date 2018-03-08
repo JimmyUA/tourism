@@ -8,12 +8,15 @@ import application.web.pages.base.BasePage;
 import application.web.pages.touristinfo.TouristInfoPage;
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -27,7 +30,9 @@ public class HandleTourPage extends BasePage {
 	@SpringBean
 	private TourService tourService;
 	private Tour tour;
+	private Tourist luckyGuy;
 	private TextField<String> mobileTextField;
+	private TextField<String> costTextField;
 	private Label touristLogin;
 	private String mobile;
 
@@ -39,15 +44,49 @@ public class HandleTourPage extends BasePage {
 		super.onInitialize();
 
 		setUpNavigationLinks();
-
+		setUpStaticLabels();
 		setUpLoginLabel();
+		setUpTextFields();
+		Form<Void> form = new Form<Void>("form");
+		add(form);
 
+		AjaxButton submit = new AjaxButton("submit") {
+			@Override
+			protected void onSubmit(AjaxRequestTarget target) {
+				tour = new Tour();
+				tour.setLuckyGuy(luckyGuy);
+				Double enteredCost = Double.valueOf(costTextField.getInput());
+				Double cost = (enteredCost * 100);
+				tour.setCost(cost.intValue());
+				tour.setTourDetailsId(1);  //TODO should be changed to real implementation
+				tourService.saveTour(tour);
+				//TODO add notification and maybe dialog asking about possibility to use bonus
+			}
+		};
+
+		form.add(submit);
+	}
+
+	private void setUpTextFields() {
 		setUpMobileTextField();
+		setUpCostTextField();
+	}
+
+	private void setUpCostTextField() {
+		costTextField = new TextField<>("costTextField", Model.of());
+		add(costTextField);
+	}
+
+	private void setUpStaticLabels() {
+		Label mobileLabel = new Label("mobileLabel", new ResourceModel("mobileLabel"));
+		add(mobileLabel);
+		Label tourCostLabel = new Label("tourCostNumber", new ResourceModel("tourCostNumber"));
+		add(tourCostLabel);
 
 	}
 
 	private void setUpMobileTextField() {
-		mobileTextField = new TextField<String>("mobileTextField", Model.of(mobile));
+		mobileTextField = new TextField<>("mobileTextField", Model.of(mobile));
 		AjaxEventBehavior ajaxEventBehavior = getAjaxFocusOutBehavior();
 		mobileTextField.add(ajaxEventBehavior);
 		add(mobileTextField);
@@ -58,14 +97,16 @@ public class HandleTourPage extends BasePage {
 			@Override
 			protected void onEvent(AjaxRequestTarget ajaxRequestTarget) {
 				mobile = mobileTextField.getInput();
-				Tourist luckyGuy = touristService.getByMobile(mobile);
+				luckyGuy = touristService.getByMobile(mobile);
 				if (luckyGuy != null) {
 					touristLogin.
 							setDefaultModel(Model.of(luckyGuy.getLogin()))
 							.setVisible(true);
 					mobileTextField.setModelObject(mobile);
-					ajaxRequestTarget.add(touristLogin, mobileTextField, HandleTourPage.this);
+				} else {
+					touristLogin.setDefaultModel(new ResourceModel("noTourist"));
 				}
+				ajaxRequestTarget.add(touristLogin, mobileTextField, HandleTourPage.this);
 			}
 		};
 	}

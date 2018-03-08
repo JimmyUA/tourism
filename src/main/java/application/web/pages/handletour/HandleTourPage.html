@@ -7,9 +7,19 @@
 <body>
 <wicket:extend>
     <div>
+        <label wicket:id="mobileLabel"/>
+    </div>
+    <div>
         <input type="text" wicket:id="mobileTextField">
         <label wicket:id="touristLogin"/>
     </div>
+    <div>
+        <label wicket:id="tourCostNumber"/>
+    </div>
+    <input type="text" wicket:id="costTextField">
+    <form wicket:id="form">
+        <input type="submit" wicket:id="submit">
+    </form>
 </wicket:extend>
 </body>
 </html>
