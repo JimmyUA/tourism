@@ -6,3 +6,6 @@ VALUES ('jimmy', 'sdfdsfdsg', '+380993551572', 'sergii.pryhodko@gmail.com',  100
 
 INSERT INTO tourists (login, password, mobile, email, parent_id, bonus_amount, used_bonuses_amount, tourist_info_id)
 VALUES ('jimmy1', 'sdfdsfdsg', '+380993551573', 'sergii.pryhodko@gmail.ua', 1, 20000, 243, 2);
+
+INSERT INTO tours (tourist_id, cost, tour_info_id)
+VALUES (1, 20000, 1);
