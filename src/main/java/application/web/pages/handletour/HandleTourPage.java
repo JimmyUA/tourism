@@ -31,6 +31,7 @@ public class HandleTourPage extends BasePage {
 	private TourService tourService;
 	private Tour tour;
 	private Tourist luckyGuy;
+	private Form<Void> form;
 	private TextField<String> mobileTextField;
 	private TextField<String> costTextField;
 	private Label touristLogin;
@@ -43,11 +44,11 @@ public class HandleTourPage extends BasePage {
 	protected void onInitialize() {
 		super.onInitialize();
 
+		form = new Form<Void>("form");
 		setUpNavigationLinks();
 		setUpStaticLabels();
 		setUpLoginLabel();
 		setUpTextFields();
-		Form<Void> form = new Form<Void>("form");
 		add(form);
 
 		AjaxButton submit = new AjaxButton("submit") {
@@ -61,6 +62,7 @@ public class HandleTourPage extends BasePage {
 				tour.setTourDetailsId(1);  //TODO should be changed to real implementation
 				tourService.saveTour(tour);
 				//TODO add notification and maybe dialog asking about possibility to use bonus
+				target.add(costTextField);
 			}
 		};
 
@@ -74,14 +76,14 @@ public class HandleTourPage extends BasePage {
 
 	private void setUpCostTextField() {
 		costTextField = new TextField<>("costTextField", Model.of());
-		add(costTextField);
+		form.add(costTextField);
 	}
 
 	private void setUpStaticLabels() {
 		Label mobileLabel = new Label("mobileLabel", new ResourceModel("mobileLabel"));
-		add(mobileLabel);
+		form.add(mobileLabel);
 		Label tourCostLabel = new Label("tourCostNumber", new ResourceModel("tourCostNumber"));
-		add(tourCostLabel);
+		form.add(tourCostLabel);
 
 	}
 
@@ -89,7 +91,7 @@ public class HandleTourPage extends BasePage {
 		mobileTextField = new TextField<>("mobileTextField", Model.of(mobile));
 		AjaxEventBehavior ajaxEventBehavior = getAjaxFocusOutBehavior();
 		mobileTextField.add(ajaxEventBehavior);
-		add(mobileTextField);
+		form.add(mobileTextField);
 	}
 
 	private AjaxEventBehavior getAjaxFocusOutBehavior() {
@@ -116,7 +118,7 @@ public class HandleTourPage extends BasePage {
 		touristLogin
 				.setOutputMarkupId(true)
 				.setVisible(false);
-		add(touristLogin);
+		form.add(touristLogin);
 	}
 
 	private void setUpNavigationLinks() {

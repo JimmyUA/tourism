@@ -9,7 +9,7 @@ public class Tourist implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tourist_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "login")

@@ -6,6 +6,7 @@ import application.SpringBeansCustomBeansConfig;
 import application.web.pages.login.LoginPage;
 import application.web.security.WebSecurity;
 import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
+import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,5 +39,12 @@ public class HandleTourPageTest {
     public void baseRender() throws Exception {
 
         tester.assertRenderedPage(HandleTourPage.class);
+    }
+
+    @Test
+    public void sumbitWithNoErrors() throws Exception {
+        FormTester formTester = tester.newFormTester("form");
+        formTester.setValue("costTextField", "2342.23");
+        formTester.submit("submit");
     }
 }

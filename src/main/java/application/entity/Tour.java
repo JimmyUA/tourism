@@ -10,14 +10,14 @@ public class Tour implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tourist_id")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(table = "tourists", name = "id")
     private Tourist luckyGuy;
 
     @Column(name = "cost")
     private Integer cost;
 
-    @Column(name = "tour_details_id")
+    @Column(name = "tour_info_id")
     private Integer tourDetailsId;
 
 
