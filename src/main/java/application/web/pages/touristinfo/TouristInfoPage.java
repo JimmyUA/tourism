@@ -90,7 +90,7 @@ public class TouristInfoPage extends BasePage{
     }
 
     private Button getSearchButton() {
-        return new Button("search") {
+        return new Button("search", new ResourceModel("searchButton")) {
             @Override
             public void onSubmit() {
                 String touristMobile = touristSearch.getDefaultModelObjectAsString();
