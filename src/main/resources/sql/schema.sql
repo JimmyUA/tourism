@@ -9,7 +9,7 @@ CREATE TABLE users (
 
 DROP TABLE IF EXISTS tourists;
 CREATE TABLE tourists (
-  id       INTEGER NOT NULL AUTO_INCREMENT,
+  tourist_id       INTEGER NOT NULL AUTO_INCREMENT,
   login VARCHAR(255) UNIQUE NOT NULL,
   password VARCHAR(255),
   mobile VARCHAR(255) NOT NULL UNIQUE ,
@@ -18,7 +18,7 @@ CREATE TABLE tourists (
   bonus_amount INTEGER DEFAULT 0,
   used_bonuses_amount INTEGER DEFAULT 0,
   tourist_info_id INTEGER,
-  PRIMARY KEY (id)
+  PRIMARY KEY (tourist_id)
 );
 
 DROP TABLE IF EXISTS tours;

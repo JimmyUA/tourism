@@ -10,8 +10,8 @@ public class Tour implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(table = "tourists", name = "id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tourist_id")
     private Tourist luckyGuy;
 
     @Column(name = "cost")
@@ -51,5 +51,16 @@ public class Tour implements Serializable {
 
     public void setTourDetailsId(Integer tourDetailsId) {
         this.tourDetailsId = tourDetailsId;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Tour{" +
+                "id=" + id +
+                ", luckyGuy=" + luckyGuy +
+                ", cost=" + cost +
+                ", tourDetailsId=" + tourDetailsId +
+                '}';
     }
 }

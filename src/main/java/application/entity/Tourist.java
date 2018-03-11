@@ -3,13 +3,14 @@ package application.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "tourists")
 public class Tourist implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "tourist_id")
     private Long id;
 
     @Column(name = "login")
@@ -39,6 +40,9 @@ public class Tourist implements Serializable{
 
     @OneToMany(mappedBy="parent", fetch = FetchType.EAGER, cascade = CascadeType.DETACH, orphanRemoval=true)
     private List<Tourist> detki;
+
+    @OneToMany(mappedBy = "luckyGuy", fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    private Set<Tour> tours;
 
     public Long getId() {
         return id;
@@ -118,6 +122,14 @@ public class Tourist implements Serializable{
 
     public void setDetki(List<Tourist> detki) {
         this.detki = detki;
+    }
+
+    public Set<Tour> getTours() {
+        return tours;
+    }
+
+    public void setTours(Set<Tour> tours) {
+        this.tours = tours;
     }
 
     @Override

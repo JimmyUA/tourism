@@ -61,6 +61,7 @@ public class HandleTourPage extends BasePage {
 				tour.setCost(cost.intValue());
 				tour.setTourDetailsId(1);  //TODO should be changed to real implementation
 				tourService.saveTour(tour);
+				System.out.println("done, tour saved - " + tour);
 				//TODO add notification and maybe dialog asking about possibility to use bonus
 				target.add(costTextField);
 			}
@@ -76,6 +77,7 @@ public class HandleTourPage extends BasePage {
 
 	private void setUpCostTextField() {
 		costTextField = new TextField<>("costTextField", Model.of());
+		costTextField.setOutputMarkupId(true);
 		form.add(costTextField);
 	}
 
@@ -89,6 +91,7 @@ public class HandleTourPage extends BasePage {
 
 	private void setUpMobileTextField() {
 		mobileTextField = new TextField<>("mobileTextField", Model.of(mobile));
+		mobileTextField.setOutputMarkupId(true);
 		AjaxEventBehavior ajaxEventBehavior = getAjaxFocusOutBehavior();
 		mobileTextField.add(ajaxEventBehavior);
 		form.add(mobileTextField);
