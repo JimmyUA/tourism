@@ -95,9 +95,11 @@ public class TouristInfoPage extends BasePage{
             public void onSubmit() {
                 String touristMobile = touristSearch.getDefaultModelObjectAsString();
                 tourist = touristService.getByMobile(touristMobile);
-                labels.forEach(label -> label.setVisible(true));
-                mapValues();
-                values.forEach(value -> value.setVisible(true));
+                if (tourist != null) {
+                    labels.forEach(label -> label.setVisible(true));
+                    mapValues();
+                    values.forEach(value -> value.setVisible(true));
+                }
             }
         };
     }

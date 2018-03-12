@@ -1,9 +1,6 @@
 body {
-<<<<<<< Updated upstream
     background-image: url("egypt.png");
-=======
-    background-image: url("Seychelles.jpg");
->>>>>>> Stashed changes
+
     background-color: #cccccc;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -20,8 +17,7 @@ nav{
 nav:hover{
     opacity: 0.8;
 }
-<<<<<<< Updated upstream
-=======
+
 
 #plane{
     width: 15%;
@@ -35,4 +31,4 @@ nav:hover{
     margin-top: 8%;
     margin-left: 30%;
 }
->>>>>>> Stashed changes
+

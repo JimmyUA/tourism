@@ -51,7 +51,7 @@ public class LoginPage extends BasePage {
 
 		loginFormTitle = new Label("loginFormTitle", new ResourceModel("loginFormTitle"));
 		feedbackPanel = new FeedbackPanel("feedback");
-		userNameField = new RequiredTextField<String>("username", Model.of(""));
+		userNameField = new RequiredTextField<>("username", Model.of(""));
 		passwordTextField = new PasswordTextField("password", Model.of(""));
 
 		submit = new Button("submit"){
