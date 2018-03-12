@@ -63,11 +63,12 @@ public class TouristInfoPage extends BasePage{
         Label mobileValue = new Label("mobileValue",Model.of());
         Label emailValue = new Label("emailValue",Model.of());
         Label bonusValue = new Label("bonusValue",Model.of());
+        Label toursAmountValue = new Label("toursAmountValue",Model.of());
         Label usedBonusValue = new Label("usedBonusValue",Model.of());
         Label parentLoginValue = new Label("parentLoginValue",Model.of());
         Label infoValue = new Label("infoValue",Model.of());
 
-        values = Arrays.asList(loginValue, mobileValue, emailValue, bonusValue, usedBonusValue, parentLoginValue, infoValue);
+        values = Arrays.asList(loginValue, mobileValue, emailValue,toursAmountValue, bonusValue, usedBonusValue, parentLoginValue, infoValue);
         values.forEach(value -> value.setVisible(false).setOutputMarkupId(true));
         add(values.stream().toArray(Label[]::new));
     }
@@ -77,12 +78,13 @@ public class TouristInfoPage extends BasePage{
         Label login = new Label("loginLabel", new ResourceModel("loginLabel"));
         Label mobile = new Label("mobileLabel", new ResourceModel("mobileLabel"));
         Label email = new Label("emailLabel", new ResourceModel("emailLabel"));
+        Label toursAmount = new Label("toursAmountLabel", new ResourceModel("toursAmountLabel"));
         Label bonus = new Label("bonusLabel", new ResourceModel("bonusLabel"));
         Label usedBonus = new Label("usedBonusLabel", new ResourceModel("usedBonusLabel"));
         Label parentLogin = new Label("parentLoginLabel", new ResourceModel("parentLoginLabel"));
         Label info = new Label("infoLabel", new ResourceModel("infoLabel"));
 
-        labels = Arrays.asList(login, mobile, email, bonus, usedBonus, parentLogin, info);
+        labels = Arrays.asList(login, mobile, email, toursAmount,  bonus, usedBonus, parentLogin, info);
 
         labels.forEach(label -> label.setVisible(false).setOutputMarkupId(true));
 
@@ -108,16 +110,17 @@ public class TouristInfoPage extends BasePage{
         values.get(0).setDefaultModel(Model.of(" " + tourist.getLogin()));
         values.get(1).setDefaultModel(Model.of(" " + tourist.getMobile()));
         values.get(2).setDefaultModel(Model.of(" " + tourist.getEmail()));
-        values.get(3).setDefaultModel(Model.of(" " + tourist.getBonusAmount()/100.0));
-        values.get(4).setDefaultModel(Model.of(" " + tourist.getUsedBonuses()/100.0));
+        values.get(3).setDefaultModel(Model.of(" " + tourist.getTours().size()));
+        values.get(4).setDefaultModel(Model.of(" " + tourist.getBonusAmount()/100.0));
+        values.get(5).setDefaultModel(Model.of(" " + tourist.getUsedBonuses()/100.0));
         Tourist parent = tourist.getParent();
         if (parent == null){
             parent = new Tourist();
             parent.setLogin("Denis");
         }
 
-        values.get(5).setDefaultModel(Model.of(" " + parent.getLogin()));
-        values.get(6).setDefaultModel(Model.of(" " + tourist.getTouristInfoId()));
+        values.get(6).setDefaultModel(Model.of(" " + parent.getLogin()));
+        values.get(7).setDefaultModel(Model.of(" " + tourist.getTouristInfoId()));
     }
 
     @Override

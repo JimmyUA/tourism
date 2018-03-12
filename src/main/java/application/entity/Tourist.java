@@ -41,7 +41,7 @@ public class Tourist implements Serializable{
     @OneToMany(mappedBy="parent", fetch = FetchType.EAGER, cascade = CascadeType.DETACH, orphanRemoval=true)
     private List<Tourist> detki;
 
-    @OneToMany(mappedBy = "luckyGuy", fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @OneToMany(mappedBy = "luckyGuy", fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private Set<Tour> tours;
 
     public Long getId() {
